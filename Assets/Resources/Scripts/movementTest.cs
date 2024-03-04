@@ -8,6 +8,7 @@ public class movementTest : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
+    public ParticleSystem playerWalkDust;
 
     private bool isRunning;
     private bool isLookUp;
@@ -27,6 +28,8 @@ public class movementTest : MonoBehaviour
     public bool isGrounded; //在地面上
     public Transform groundCheck;//检测点
     public LayerMask ground;//图层
+    
+
     public float fallMultiplier=3.0f;//下降加速度
     public float jumpMultiplier = 2.0f;//起跳加成
     public int jumpTime = 1;//跳跃次数
@@ -91,6 +94,7 @@ public class movementTest : MonoBehaviour
         Vector3 playerScale = transform.localScale;
         playerScale.x *= -1;
         transform.localScale = playerScale;
+        PlayerWalkDust();
     }
     private void Jump()
     {
@@ -125,6 +129,7 @@ public class movementTest : MonoBehaviour
         {
             rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             isJump = false;
+            PlayerWalkDust();
         }
         if (moveJump && jumpTime > 0 && canDoubleJump)
         {
@@ -135,6 +140,7 @@ public class movementTest : MonoBehaviour
             rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             jumpTime--;
             isJump = false;
+            PlayerWalkDust();
         }
         if (isGrounded)
         {
@@ -159,7 +165,12 @@ public class movementTest : MonoBehaviour
         {
             rb.gravityScale = 1;
         }
+        
         animator.SetBool("isJump", isJumping);
+    }
+    private void PlayerWalkDust()//灰尘特效
+    {
+        playerWalkDust.Play();
     }
 
 }
