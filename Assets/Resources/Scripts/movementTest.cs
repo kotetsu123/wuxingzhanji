@@ -12,6 +12,9 @@ public class movementTest : MonoBehaviour
 
     private bool isRunning;
     private bool isLookUp;
+    private bool isUnAttackable = false;//是否为无敌状态
+    private float unAttackableTimer;//无敌时间计时器
+
     private bool moveJump;
     private bool isJumping;//传递动画参数用
     private bool isJump;//传递参数用
@@ -36,6 +39,13 @@ public class movementTest : MonoBehaviour
 
     public bool canDoubleJump ;//二段跳判定
     public bool singleJumpOnly = true;//单次跳跃判定
+    
+    public float timeUnAttackable = 2.0f;//角色无敌时间常量
+
+    //角色生命值方面
+    public int currentHp;//角色当前生命值
+    public int maxHp = 5;//角色最大生命值上限
+
 
 
 
@@ -54,6 +64,14 @@ public class movementTest : MonoBehaviour
     {
         Move();
         Jump();
+        if (isUnAttackable)
+        {
+            unAttackableTimer = unAttackableTimer - Time.deltaTime;
+            if (unAttackableTimer <= 0)
+            {
+                isUnAttackable = false;
+            }
+        }
     }
     private void FixedUpdate()
     {
@@ -172,5 +190,20 @@ public class movementTest : MonoBehaviour
     {
         playerWalkDust.Play();
     }
+    public void Hp_Control(int amount)
+    {
+        if(amount < 0)
+        {
+            if (isUnAttackable == true)
+            {
+                return;
+            }
+            isUnAttackable = false;
+            unAttackableTimer = timeUnAttackable;
+            animator.SetTrigger("hurt");
+        }
+        currentHp = Mathf.Clamp(currentHp + amount, 0, maxHp);
+        Debug.Log(currentHp + "/" + maxHp);
 
+    }
 }
