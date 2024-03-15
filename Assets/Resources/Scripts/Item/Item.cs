@@ -15,14 +15,20 @@ public class Item
     public string Description { get; set; }
     public int Capacity { get; set; }
 
-    public Item(int id,string name,ItemType itemType,string des,int capacity)
+    public string sprite { get; set; }
+
+    public Item()
+    {
+        this.ID = -1;
+    }
+    public Item(int id,string name,ItemType itemType,string des,int capacity,string sprite)
     {
         this.ID = id;
         this.Name = name;
         this.itemType = itemType;
         this.Description= des;
         this.Capacity = capacity;
-
+        this.sprite = sprite;
     }
     /// <summary>
     /// 物品类型
