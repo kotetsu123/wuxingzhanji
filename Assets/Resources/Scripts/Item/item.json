@@ -1,11 +1,14 @@
 [
-{"id":1,
-"name":"HpPotion",
-"type":"Consumable",
-"description":"新鲜的恢复药剂，哦——兄弟你肯定会喜欢的。",
-"capacity":10,
-"Hp":10,
-"Mp":0,
-"sprite":"Sprite/HpPotion"
-}
+    {
+        "id": 1,
+        "name": "HpPotion",
+        "type": "Consumable",
+        "description": "新鲜的恢复药剂——哦！兄弟你一定会喜欢的。",
+        "capacity": 10,
+        "buyprice": 2,
+        "sellprice": 1,
+        "hp": 10,
+        "mp": 0,
+        "sprite": "Resources/Spirte/HpPotion"
+    }
 ]

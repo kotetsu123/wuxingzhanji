@@ -15,19 +15,24 @@ public class Item
     public string Description { get; set; }
     public int Capacity { get; set; }
 
+    public int BuyPrice { get; set; }
+
+    public int SellPrice { get; set; }
     public string sprite { get; set; }
 
     public Item()
     {
         this.ID = -1;
     }
-    public Item(int id,string name,ItemType itemType,string des,int capacity,string sprite)
+    public Item(int id,string name,ItemType itemType,string des,int capacity,int buyprice,int sellprice,string sprite)
     {
         this.ID = id;
         this.Name = name;
         this.itemType = itemType;
         this.Description= des;
         this.Capacity = capacity;
+        this.BuyPrice = buyprice;
+        this.SellPrice = sellprice;
         this.sprite = sprite;
     }
     /// <summary>
@@ -35,7 +40,10 @@ public class Item
     /// </summary>
     public enum ItemType
     {
-        Consumble
+        Consumable,
+        Equipment,
+        Material,
+        Weapon,
     }
    
 }
